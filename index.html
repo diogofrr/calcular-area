@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas Geométricas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Silkscreen:wght@400;700&display=swap');
+
+        *{
+            padding: 0;
+            margin: 0;
+            border: 0;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Silkscreen', cursive;
+        }
+
+        main{
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        main > h1{
+            font-size: 36px;
+            margin-bottom: 10vh;
+        }
+
+        section#formas{
+            display: flex;
+            flex-direction: row;
+        }
+
+        section#formas > div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 50px;
+        }
+
+        section#formas > div > p{
+            font-size: 24px;
+            margin: 20px 50px 0px 50px;
+        }
+
+        div#quadrado{
+            background: aqua;
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        div#quadrado:hover{
+            filter: drop-shadow(0 0 0.75rem aqua);
+            transform: translateY(-15px);
+            transition: 0.3s;
+        }
+
+        div#circulo{
+            background: fuchsia;
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+
+        div#circulo:hover{
+            filter: drop-shadow(0 0 0.75rem fuchsia);
+            transform: translateY(-15px);
+            transition: 0.3s;
+        }
+
+        div#triangulo{
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 300px solid #ffb200;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        div#triangulo:hover{
+            filter: drop-shadow(0 0 0.75rem #ffb200);
+            transform: translateY(-15px);
+            transition: 0.3s;
+        }
+
+        section.area{
+            display: none;
+            align-items: center;
+            flex-direction: column;
+            border: solid blue 1px;
+            box-shadow: 0 0 0.75rem blue;
+            width: 300px;
+            height: 410px;
+            position: absolute;
+            background-color: black;
+            text-align: center;
+        }
+
+        section.area button{
+            align-self: flex-start;
+            margin-left: 0.8vw;
+            background-color: black;
+            border: solid blue 1px;
+            box-shadow: 0 0 0.5rem blue;
+            padding: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        section.area button:hover{
+            transition: 0.3s;
+            box-shadow: 0 0 2rem blue;
+            background-color: blue;
+        }
+
+        section.area > div{
+            display: flex;
+            flex-direction: row;
+        }
+
+        div.xis p{
+            color: red;
+            margin-top: 20px;
+            position: absolute;
+            cursor: pointer;
+            top: -20px;
+            right: 5px;
+            font-size: 20px;
+        }
+
+        section.area h2{
+            font-size: 16px;
+            margin: 20px 0px 40px 0px;
+        }
+
+        section#circuloSECT input{
+            width: 90%;
+            color: black;
+            margin: 10px 0px 20px 0px;
+        }
+
+        section#quadradoSECT input{
+            width: 90%;
+            color: black;
+            margin: 10px 0px 20px 0px;
+        }
+        
+        section#trianguloSECT input{
+            width: 90%;
+            color: black;
+            margin: 10px 0px 20px 0px;
+        }
+
+        p.resultado{
+            text-align: left;
+            width: 90%;
+            margin-top: 1.5rem;
+        }
+
+        section.aberta{
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Selecione uma forma geométrica:</h1>
+        <section id="formas">
+            <div>
+                <div id="circulo" onclick="chamarJanela(janelaCirculo)"></div>
+                <p>Círculo</p>
+                <section class="area" id="circuloSECT">
+                    <div>
+                        <h2>- Cálculo de Área -</h2>
+                        <div class="xis"><p id="xisC" onclick="chamarJanela(janelaCirculo)">x</p></div>
+                    </div>
+                    <label for="raio">Raio do Círculo:</label>
+                    <input type="number" name="raio" id="raio">
+                    <button id="btn-circulo" onclick="calcCirculo()">Calcular</button>
+                    <p class="resultado" id="resultadoCIRCULO">Resultado: </p>
+                </section>
+            </div>
+            <div>
+                <div id="quadrado" onclick="chamarJanela(janelaQuadrado)"></div>
+                <p>Quadrado</p>
+                <section class="area" id="quadradoSECT">
+                    <div>
+                        <h2>- Cálculo de Área -</h2>
+                        <div class="xis"><p id="xisQ" onclick="chamarJanela(janelaQuadrado)">x</p></div>
+                    </div>
+                    <label for="ladoquad">Lado do Quadrado:</label>
+                    <input type="number" name="ladoq" id="ladoquad">
+                    <button id="btn-quadrado" onclick="calcQuadrado()">Calcular</button>
+                    <p class="resultado" id="resultadoQUADRADO">Resultado: </p>
+                </section>
+            </div>
+            <div>
+                <div id="triangulo" onclick="chamarJanela(janelaTriangulo)"></div>
+                <p>Triângulo</p>
+                <section class="area" id="trianguloSECT">
+                    <div>
+                        <h2>- Cálculo de Área -</h2>
+                        <div class="xis"><p id="xisT" onclick="chamarJanela(janelaTriangulo)">x</p></div>
+                    </div>
+                    <label for="base">Base do Triângulo: </label>
+                    <input type="number" name="base" id="baseT">
+                    <label for="altura">Altura do Triângulo: </label>
+                    <input type="number" name="altura" id="alturaT">
+                    <button id="btn-triangulo" onclick="calcTriangulo()">Calcular</button>
+                    <p class="resultado" id="resultadoTRIANGULO">Resultado: </p>
+                </section>
+            </div>
+        </section>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
